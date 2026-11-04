@@ -17,6 +17,13 @@ export const sharedWorks: Record<SharedWorkId, SharedWork> = {
     productionDate: "2026-11-03",
     updatedAt: "2026-11-04",
   },
+  "beauty-01": {
+    id: "beauty-01",
+    creditsUsed: 49,
+    toolMonthlyFeeYen: 2578,
+    productionDate: "2026-11-04",
+    updatedAt: "2026-11-04",
+  },
 };
 
 /** SharedWork から Main v2 のevidenceフィールド文字列を生成する */

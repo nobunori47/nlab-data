@@ -21,4 +21,4 @@ export interface SharedWork {
  * 新しい作品を works.ts に追加したら必ずここにも追記すること。
  * TypeScriptの型チェックにより、無効なIDの参照はビルド時エラーになる。
  */
-export type SharedWorkId = "coffee-01";
+export type SharedWorkId = "coffee-01" | "beauty-01";
