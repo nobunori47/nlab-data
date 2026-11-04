@@ -1,0 +1,19 @@
+{
+  "name": "nlab-data",
+  "version": "1.0.0",
+  "private": true,
+  "description": "N-Lab shared canonical work data",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "verify": "npx tsx scripts/verify-sync.ts",
+    "sync": "node scripts/sync.js",
+    "sync:dry": "node scripts/sync.js --dry-run"
+  }
+}
