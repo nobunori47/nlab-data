@@ -34,4 +34,21 @@ export interface PortfolioEntry {
   sharedWorkId?: import('./types').SharedWorkId;
   links: readonly { label: string; href: string }[];
   asset?: { src: string; alt: string; diagram?: string };
+  details?: PortfolioDetails;
+}
+
+export interface PortfolioDetails {
+  challenge: string;
+  solution: string;
+  implemented: readonly string[];
+  technologies: readonly string[];
+  verification: readonly string[];
+  limitations: readonly string[];
+  improvements: readonly string[];
+  futureWork: readonly string[];
+  architecture: readonly string[];
+  process: readonly { stage: string; description: string }[];
+  reviewedOn: string;
+  mediaNote: string;
+  externalLinkNote: string;
 }

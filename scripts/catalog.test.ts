@@ -41,7 +41,9 @@ test('catalog relationships resolve and unverified drafts stay unpublished',()=>
   if(entry.publication==='published')assert.equal(entry.evidenceStatus,'source-reviewed');
   for(const link of entry.links)assert.equal(new URL(link.href).protocol,'https:');
  }
- assert.equal(publishedPortfolio.length,3);
+ assert.equal(publishedPortfolio.length,8);
+ assert.equal(publishedPortfolio.filter(p=>p.kind==='development').length,7);
+ for(const p of publishedPortfolio.filter(p=>p.kind==='development'))assert.ok(p.details?.limitations.length);
  assert.ok(publishedPortfolio.every(p=>p.origin!=='paid-client'));
 });
 test('existing price policy is retained',()=>{
@@ -52,4 +54,15 @@ test('existing price policy is retained',()=>{
  assert.equal(formatPrice(paid[0]),'30,000円〜');
  assert.equal(formatPrice(pricingCatalog[0]),'無料');
  assert.equal(formatPrice(pricingCatalog[2]),'個別お見積もり');
+});
+
+test('private evidence and held media are excluded from the public catalog',()=>{
+ const serialized=JSON.stringify(portfolioCatalog);
+ for(const prohibited of ['initialYenTaxIncluded','courseEstimate','teacherStatements','nobunori47','980000','3053000'])assert.ok(!serialized.includes(prohibited));
+ for(const held of ['beauty-video','beauty-image'])assert.ok(!publishedPortfolio.some(entry=>entry.id===held));
+ for(const entry of publishedPortfolio.filter(entry=>entry.kind==='development')){
+  assert.equal(entry.origin,'course-self-produced');
+  assert.equal(entry.links.length,0,'identity-linked project URLs must remain held');
+  assert.equal(entry.details?.architecture.length,5);
+ }
 });
